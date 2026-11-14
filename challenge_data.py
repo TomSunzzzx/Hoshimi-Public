@@ -38,8 +38,9 @@ def challenge_catalog() -> dict:
         r.advance_pool=rows('BossChallengeAdvancePoolCfg')
         r.seizure=require('BattleEquipSeizureStageCfg').all
         r.enchant={}
-        for _,group in ipairs(require('StageGroupCfg')) do
-            if group.type==8 and #r.enchant<3 then r.enchant[#r.enchant+1]=group.id end
+        local groups=require('StageGroupCfg')
+        for _,id in ipairs(groups.all) do
+            if groups[id].type==8 and #r.enchant<3 then r.enchant[#r.enchant+1]=id end
         end
         r.abyss=rows('AbyssCfg')
         r.core=rows('CoreVerificationInfoCfg')
